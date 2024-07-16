@@ -1,20 +1,19 @@
 const int CLOCK_PIN = 9;   // Clock pin for encoder
 const int DATA_PIN = 6;    // Data pin for encoder
 const int BIT_COUNT = 13;  // Number of bits for Gray code
-
+const int CLOCK = 10;
 void setup() {
   // Set up our pins
   pinMode(DATA_PIN, INPUT);
   pinMode(CLOCK_PIN, OUTPUT);
-  
+  pinMode(CLOCK, OUTPUT);
   // Give some default values
   digitalWrite(CLOCK_PIN, LOW);
-  
+ digitalWrite(CLOCK, LOW);
   // Set up Timer1 for clock generation at 100 kHz
   TCCR1A = _BV(COM1A0); // Toggle OC1A on Compare Match (PWM mode)
   TCCR1B = _BV(WGM12) | _BV(CS10);  // CTC mode, no prescaler
-  OCR1A = 79; // Set OCR1A for 100 kHz frequency at 16 MHz clock
-  
+  OCR1A = 79; // Set OCR1A for 100 kHz frequency at 16 MHz clock 
   Serial.begin(19200);
 }
 
@@ -55,10 +54,11 @@ unsigned long readPosition() {
 unsigned long shiftIn(const int data_pin, const int clock_pin, const int bit_count) {
   unsigned long data = 0;
   for (int i = 0; i < bit_count; i++) {
-    digitalWrite(clock_pin, LOW);
+    //digitalWrite(clock_pin, LOW);
+    PORTB &= ~(1<<2);
     delayMicroseconds(5);  // Adjust delay to meet encoder's timing requirements
     data |= digitalRead(data_pin) << (bit_count - 1 - i);
-    digitalWrite(clock_pin, HIGH);
+    PORTB |= (1<<2);
     delayMicroseconds(5);  // Adjust delay to meet encoder's timing requirements
   }
   return data;
