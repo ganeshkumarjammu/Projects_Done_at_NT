@@ -1,66 +1,58 @@
-const int CLOCK_PIN = 9;   // Clock pin for encoder
-const int DATA_PIN = 6;    // Data pin for encoder
-const int BIT_COUNT = 13;  // Number of bits for Gray code
-const int CLOCK = 10;
+const int CLOCK_PIN = 9;  // Use digital pin 9 as the clock pin (supports PWM)
+const int DATA_PIN = 10;   // Data pin for encoder
+const int BIT_COUNT = 13; // Number of bits for Gray code
+const int READ_DELAY = 21; // Delay between readings in microseconds
+
 void setup() {
-  // Set up our pins
+  // Set the data pin
   pinMode(DATA_PIN, INPUT);
   pinMode(CLOCK_PIN, OUTPUT);
-  pinMode(CLOCK, OUTPUT);
-  // Give some default values
-  digitalWrite(CLOCK_PIN, LOW);
- digitalWrite(CLOCK, LOW);
-  // Set up Timer1 for clock generation at 100 kHz
-  TCCR1A = _BV(COM1A0); // Toggle OC1A on Compare Match (PWM mode)
-  TCCR1B = _BV(WGM12) | _BV(CS10);  // CTC mode, no prescaler
-  OCR1A = 79; // Set OCR1A for 100 kHz frequency at 16 MHz clock 
+  // Set the clock pin to high initially
+  digitalWrite(CLOCK_PIN, HIGH);
+  // Initialize serial communication
   Serial.begin(19200);
 }
 
 void loop() {
-  unsigned long reading = readPosition();
-  unsigned long binaryValue = grayToBinary(reading);
-  
+  unsigned long grayCode = readGrayCode();
+  unsigned long binaryValue = grayToBinary(grayCode);
   Serial.print("Gray Code: ");
-  printBinary(reading, BIT_COUNT);
+  printBinary(grayCode, BIT_COUNT);
   Serial.print(" Binary: ");
   printBinary(binaryValue, BIT_COUNT);
   Serial.print(" Position: ");
-  Serial.print(binaryValue);
-  Serial.print(" Decimal: ");
-  Serial.println(binaryValue, DEC);  // Print the binary value in decimal
-  
-  delay(1000);
+  Serial.println(binaryValue, DEC);
+  delayMicroseconds(READ_DELAY); // Delay to meet encoder's timing requirements
 }
 
-// Read the current angular position
-unsigned long readPosition() {
-  // Read the same position data twice to check for errors
-  unsigned long sample1 = shiftIn(DATA_PIN, CLOCK_PIN, BIT_COUNT);
-  unsigned long sample2 = shiftIn(DATA_PIN, CLOCK_PIN, BIT_COUNT);
-
-  delayMicroseconds(25);  // Clock must be high for 20 microseconds before a new sample can be taken
-
-  if (sample1 != sample2) {
-    Serial.print("Samples don't match: sample1=");
-    Serial.print(sample1);
-    Serial.print(", sample2=");
-    Serial.println(sample2);
-  }
-  return sample1;
+void setupPWM() {
+  // Configure Timer1 for 100 kHz PWM
+  TCCR1A = _BV(COM1A0); // Toggle OC1A on Compare Match (PWM mode)
+  TCCR1B = _BV(WGM12) | _BV(CS10);  // CTC mode, no prescaler
+  OCR1A = 159; // Set OCR1A for 50Khz frequency 
 }
 
-// Read in a byte of data from the digital input of the board.
-unsigned long shiftIn(const int data_pin, const int clock_pin, const int bit_count) {
+// Read the 13-bit Gray code
+unsigned long readGrayCode() {
   unsigned long data = 0;
-  for (int i = 0; i < bit_count; i++) {
-    //digitalWrite(clock_pin, LOW);
-    PORTB &= ~(1<<2);
-    delayMicroseconds(5);  // Adjust delay to meet encoder's timing requirements
-    data |= digitalRead(data_pin) << (bit_count - 1 - i);
-    PORTB |= (1<<2);
-    delayMicroseconds(5);  // Adjust delay to meet encoder's timing requirements
+// Ensure clock is high before starting the read cycle
+//  digitalWrite(CLOCK_PIN, HIGH);
+//  delayMicroseconds(5);
+  // Setup PWM for clock signal
+  setupPWM();
+  // Generate 13 clock cycles and read the data
+  for (int i = 0; i < BIT_COUNT; i++) {
+    // Wait for the clock to go low
+    while (digitalRead(CLOCK_PIN) == HIGH);
+    // Wait for the clock to go high
+    while (digitalRead(CLOCK_PIN) == LOW);
+    data <<= 1;
+    data |= digitalRead(DATA_PIN); // Read the data during the high phase
   }
+  // Disable PWM and set the clock pin high
+  TCCR1A = 0;
+  TCCR1B = 0;
+  digitalWrite(CLOCK_PIN, HIGH);
   return data;
 }
 
