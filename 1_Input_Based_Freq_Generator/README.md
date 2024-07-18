@@ -31,7 +31,7 @@ This project generates square wave signals at different frequencies using an Ard
 ### Frequency Calculation
 The frequency of the signal is controlled using Timer1 in CTC (Clear Timer on Compare Match) mode. The formula used for calculating the OCR (Output Compare Register) value is:
 
-\[ \text{OCR} = \left(\frac{16,000,000}{2 \times \text{frequency (in Hz)}}\right) - 1 \]
+      OCR = ( Clock_Speed / (2 x frequency_in_Hz) ) - 1 
 
 This formula derives from the following:
 - 16,000,000 is the clock speed of the Arduino (16 MHz).
@@ -42,28 +42,25 @@ This formula derives from the following:
 
 | Frequency (kHz) | Frequency (Hz) | OCR Calculation                                      | OCR Value |
 |-----------------|----------------|-----------------------------------------------------|-----------|
-| 50              | 50,000         | \(\left(\frac{16,000,000}{2 \times 50,000}\right) - 1\) = 159 | 159       |
-| 100             | 100,000        | \(\left(\frac{16,000,000}{2 \times 100,000}\right) - 1\) = 79  | 79        |
-| 200             | 200,000        | \(\left(\frac{16,000,000}{2 \times 200,000}\right) - 1\) = 39  | 39        |
-| 500             | 500,000        | \(\left(\frac{16,000,000}{2 \times 500,000}\right) - 1\) = 15  | 15        |
-| 1000            | 1,000,000      | \(\left(\frac{16,000,000}{2 \times 1,000,000}\right) - 1\) = 7 | 7         |
-| 2000            | 2,000,000      | \(\left(\frac{16,000,000}{2 \times 2,000,000}\right) - 1\) = 3 | 3         |
+| 50              | 50,000         | \(16,000,000/(2 x 50,000)) - 1\) = 159 | 159       |
+| 100             | 100,000        | \(16,000,000/(2 x 100,000)) - 1\) = 79  | 79        |
+| 200             | 200,000        | \(16,000,000/(2 x 200,000)) - 1\) = 39  | 39        |
+| 500             | 500,000        | \(16,000,000/(2 x 500,000)) - 1\) = 15  | 15        |
+| 1000            | 1,000,000      | \(16,000,000/(2 x 1,000,000)) - 1\) = 7 | 7         |
+| 2000            | 2,000,000      | \(16,000,000/(2 x 2,000,000)) - 1\) = 3 | 3         |
 
 For detailed calculations, refer to the Google Sheets [here](https://docs.google.com/spreadsheets/d/1KBi5O0dpadDuW_CeP1MCz1DQ4IypS_nGeOXi4cxVNZ8/edit?usp=sharing).
 
-## Frequency Calculation
-The output compare register (OCR1A) value is calculated based on the desired frequency using the formula:
+## Time Period Table
 
-\[ \text{OCR} = \left(\frac{16,000,000}{2 \times \text{frequency (in Hz)}}\right) - 1 \]
-
-| Frequency (kHz) | Frequency (Hz) | OCR Value |
-|-----------------|----------------|-----------|
-| 50              | 50,000         | 159       |
-| 100             | 100,000        | 79        |
-| 200             | 200,000        | 39        |
-| 500             | 500,000        | 15        |
-| 1000            | 1,000,000      | 7         |
-| 2000            | 2,000,000      | 3         |
+| Frequency (kHz) | Frequency (Hz) | OCR Value | Time Period |
+|-----------------|----------------|-----------|-------------|
+| 50              | 50,000         | 159       | 20          |
+| 100             | 100,000        | 79        | 10          |
+| 200             | 200,000        | 39        | 5           |
+| 500             | 500,000        | 15        | 2           |
+| 1000            | 1,000,000      | 7         | 1           |
+| 2000            | 2,000,000      | 3         | 0.5         |
 
 
 
