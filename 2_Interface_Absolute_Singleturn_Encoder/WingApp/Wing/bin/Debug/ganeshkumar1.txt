@@ -1,0 +1,141 @@
+prevAngle :0 iAngle :0 Angle :0
+iAngle :A
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle
+
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0C?P?? 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle
+prevAngle :0 iAngle :0 Angle :0
+Angle: 0
+No Change in Angle

@@ -1,0 +1,101 @@
+using System;
+using System.IO.Ports;
+using System.Windows.Forms;
+
+namespace Wing
+{
+    public partial class Wing : Form
+    {
+        public Wing()
+        {
+            InitializeComponent();
+        }
+
+
+        private void scanBT_Click(object sender, EventArgs e)
+        {
+            PortCB.Text = "";
+            PortCB.Items.Clear();
+            String[] ports = SerialPort.GetPortNames();
+            PortCB.Items.AddRange(ports);
+        }
+
+        private void connectBT_Click(object sender, EventArgs e)
+        {
+            if (ConnectPort() == true)
+            {
+                connectBT.Enabled = false;
+                disconnectBT.Enabled = true;
+                PortCB.Enabled = false;
+                Baudrate.Enabled = false;
+                sendBT.Enabled = true;
+
+            }
+        }
+        public bool ConnectPort()
+        {
+            try
+            {
+                if (PortCB.Text != "" || Baudrate.Text != "")
+                {
+                    serialPort1.PortName = PortCB.Text;
+                    serialPort1.BaudRate = Int32.Parse(Baudrate.Text);
+                    serialPort1.Open();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message,"Error!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
+            return false;
+        }
+
+        private void disconnectBT_Click(object sender, EventArgs e)
+        {
+
+            connectBT.Enabled = true;
+            disconnectBT.Enabled = false;
+            PortCB.Enabled = true;
+            Baudrate.Enabled = true;
+            sendBT.Enabled = false;
+            incomingTB.Text = "";
+            serialPort1.Close();
+        }
+
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            this.Invoke(new EventHandler(serialPort1_DataReceived));
+
+        }
+
+        private void serialPort1_DataReceived(object sender, EventArgs e)
+        {
+            string dump = serialPort1.ReadLine();
+            incomingTB.Text = incomingTB.Text + dump;
+        }
+
+        private void clearBT_Click(object sender, EventArgs e)
+        {
+            incomingTB.Text = "";
+        }
+
+        private void sendBT_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!serialPort1.IsOpen)
+                {
+                    serialPort1.Open();
+                }
+                serialPort1.Write(outgoingTB.Text);
+                outgoingTB.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
+        }
+    }
+}
